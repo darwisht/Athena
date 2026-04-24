@@ -2,6 +2,13 @@
 
 Athena is a stateless OpenClaw skill for **binary strategic decisions**. OpenClaw owns dialogue, memory, and routing; Athena owns extraction, structural diagnosis, and deterministic synthesis.
 
+## Companion Documents
+- `DOCTRINE.md` — Core identity and reasoning standards.
+- `PRD.md` — Product requirements and success criteria.
+- `SKILL.md` — Operational runtime contract.
+- `HARDENING-ADDENDUM.md` — Safety and doctrine enforcement.
+- `IMPLEMENTATION-PACK.md` — Setup and integration guide.
+
 ## 1. Execution Pipeline
 
 Athena follows a fixed 9-step internal pipeline:

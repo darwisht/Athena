@@ -36,13 +36,20 @@ export interface DecisionObject {
     statement: string;
     success_definition: string | null;
   };
-  options: [Option, Option];
+  options: [Option, Option]; // Exactly two
   criteria: Criterion[];
   assumptions: Assumption[];
   reversal_condition: string | null;
   error_asymmetry: ErrorAsymmetry;
   structural_flags: StructuralFlags;
   unresolved_questions: string[];
+}
+
+export interface AthenaSkillRequest {
+  user_query: string;
+  conversation_history?: string;
+  conversation_summary?: string;
+  agent_knowledge?: string;
 }
 
 export interface AthenaSkillResponse {
@@ -54,4 +61,22 @@ export interface AthenaSkillResponse {
   structural_flags?: StructuralFlags;
   decision_brief?: string;
   evaluator_flags?: string[];
+}
+
+export interface AuditEvent {
+  event_id: string;
+  timestamp: string;
+  session_id: string;
+  prompt_version: string;
+  schema_version: string;
+  model_identifier: string;
+  input_summary: string;
+  invocation_status: ResponseStatus | "error";
+  decision_id?: string | null;
+  structural_flags?: StructuralFlags | null;
+  evaluator_flags: string[];
+  retries: number;
+  output_summary: string;
+  error_details?: Record<string, unknown> | null;
+  processing_duration_ms: number;
 }

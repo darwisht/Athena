@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Athena Invocation Event v1.3.1",
+  "type": "object",
+  "required": [
+    "event_id",
+    "timestamp",
+    "session_id",
+    "prompt_version",
+    "schema_version",
+    "model_identifier",
+    "input_summary",
+    "invocation_status",
+    "evaluator_flags",
+    "output_summary",
+    "processing_duration_ms"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "prompt_version": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "model_identifier": { "type": "string" },
+    "input_summary": { "type": "string", "maxLength": 1000 },
+    "invocation_status": { "enum": ["complete", "needs_clarification", "needs_binary_framing", "unsupported", "error"] },
+    "decision_id": { "type": ["string", "null"] },
+    "structural_flags": { "type": ["object", "null"] },
+    "evaluator_flags": { "type": "array", "items": { "type": "string" } },
+    "retries": { "type": "integer" },
+    "output_summary": { "type": "string", "maxLength": 1000 },
+    "error_details": { "type": ["object", "null"] },
+    "processing_duration_ms": { "type": "integer" }
+  }
+}
