@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Athena Final Decision Schema v1.3.1",
+  "type": "object",
+  "required": [
+    "decision_id",
+    "goal",
+    "options",
+    "criteria",
+    "assumptions",
+    "reversal_condition",
+    "error_asymmetry",
+    "structural_flags",
+    "unresolved_questions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "decision_id": { "type": "string", "format": "uuid" },
+    "goal": {
+      "type": "object",
+      "required": ["statement", "success_definition"],
+      "properties": {
+        "statement": { "type": "string" },
+        "success_definition": { "type": ["string", "null"] }
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "enum": ["A", "B"] },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "criteria": { "type": "array", "items": { "type": "object" } },
+    "assumptions": { "type": "array", "items": { "type": "object" } },
+    "reversal_condition": { "type": ["string", "null"] },
+    "error_asymmetry": { "type": "object" },
+    "structural_flags": {
+      "type": "object",
+      "required": [
+        "missing_priority_1_dominance",
+        "no_reversal_condition_identified",
+        "low_confidence_high_impact_assumption",
+        "missing_error_asymmetry"
+      ],
+      "properties": {
+        "missing_priority_1_dominance": { "type": "boolean" },
+        "no_reversal_condition_identified": { "type": "boolean" },
+        "low_confidence_high_impact_assumption": { "type": "boolean" },
+        "missing_error_asymmetry": { "type": "boolean" }
+      }
+    },
+    "unresolved_questions": { "type": "array", "items": { "type": "string" } }
+  }
+}

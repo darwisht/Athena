@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Athena Decision Extract Schema v1.3.1",
+  "type": "object",
+  "required": ["goal", "options", "criteria", "assumptions", "reversal_condition", "error_asymmetry"],
+  "additionalProperties": false,
+  "properties": {
+    "goal": {
+      "type": "object",
+      "required": ["statement", "success_definition"],
+      "properties": {
+        "statement": { "type": "string", "minLength": 1 },
+        "success_definition": { "type": ["string", "null"] }
+      }
+    },
+    "options": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "enum": ["A", "B"] },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "priority", "dominant_option"],
+        "properties": {
+          "name": { "type": "string" },
+          "priority": { "type": "integer", "minimum": 1 },
+          "dominant_option": { "enum": ["A", "B", "tie", null] }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["statement", "confidence", "impact", "invalidates_if_false"],
+        "properties": {
+          "statement": { "type": "string" },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "impact": { "enum": ["high", "medium", "low"] },
+          "invalidates_if_false": { "enum": ["A", "B", "both", "entire_decision", null] }
+        }
+      }
+    },
+    "reversal_condition": { "type": ["string", "null"] },
+    "error_asymmetry": {
+      "type": "object",
+      "required": ["worse_mistake", "rationale"],
+      "properties": {
+        "worse_mistake": { "enum": ["A_wrong", "B_wrong", "symmetric", null] },
+        "rationale": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
